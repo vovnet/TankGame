@@ -1,0 +1,8 @@
+obj
+bin
+src/ash
+lib
+assets
+src/ru
+
+*.as3proj
