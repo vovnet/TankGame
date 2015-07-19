@@ -28,7 +28,7 @@ package
 			awards.push("megaDriver");
 			awards.push("hellDriver");
 			
-			// register stat
+			// register stat регистрируем статистику
 			AntStatistic.registerStat(KILLS, AntStatisticData.ADD);
 			AntStatistic.registerStat(DRIVER, AntStatisticData.MAXIMUM);
 			
