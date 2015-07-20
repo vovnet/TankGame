@@ -41,7 +41,7 @@ package states
 		
 		public static var isPause:Boolean;
 		
-		private var lab:AntLabel;
+		private var distanceLabel:AntLabel;
 		
 		// карта
 		private var world:WorldBackground;
@@ -52,8 +52,8 @@ package states
 		private var countMoney:int = 0;
 		private var moneyPanel:MoneyView;
 		
-		private var mainLayer:AntEntity;
-		private var uiLayer:AntEntity;
+		public var mainLayer:AntEntity;
+		public var uiLayer:AntEntity;
 		
 		// расстояние до следующего блокпоста
 		private var nextBlockpostDistance:int = 10;
@@ -67,8 +67,14 @@ package states
 		
 		override public function create():void 
 		{
+			mainLayer = new AntEntity();
+			add(mainLayer);
+			
+			uiLayer = new AntEntity();
+			add(uiLayer);
+			
 			world = new WorldBackground();
-			add(world);
+			mainLayer.add(world);
 			
 			init();
 			
@@ -98,9 +104,9 @@ package states
 			}
 			world.velocity.y = speed;
 			
-			if (lab != null) {
+			if (distanceLabel != null) {
 				distance += (world.velocity.y / 20) * AntG.elapsed;
-				lab.text = distance.toFixed() + " m";
+				distanceLabel.text = distance.toFixed() + " m";
 				respawnEnemies();
 				AntStatistic.track(StatAward.DRIVER, int(distance));
 			}
@@ -119,6 +125,8 @@ package states
 			} else {
 				bullet.reset(t.x, t.y - 8);
 			}
+			
+			mainLayer.add(bullet);
 		}
 		
 		private function respawnEnemies():void 
@@ -135,11 +143,8 @@ package states
 		{
 			t = new tanks.Tank(this);
 			t.y = 540;
-			add(t);
+			mainLayer.add(t);
 			t.play();
-			
-			uiLayer = new AntEntity();
-			add(uiLayer);
 			
 			moneyPanel = new MoneyView();
 			moneyPanel.reset(140, 30);
@@ -150,18 +155,18 @@ package states
 			ammoPanel.y = 550;
 			uiLayer.add(ammoPanel);
 			
-			lab = new AntLabel("system", 12, 0xffffff);
-			lab.text = distance.toString();
-			lab.x = 20;
-			lab.y = 30;
-			add(lab);
+			distanceLabel = new AntLabel("system", 12, 0xffffff);
+			distanceLabel.text = distance.toString();
+			distanceLabel.x = 20;
+			distanceLabel.y = 30;
+			uiLayer.add(distanceLabel);
 			
 			isPause = false;
 			
 			var pauseBtn:AntButton = AntButton.makeButton("simple_button", "Pause", new AntLabel("system", 14, 0x000000));
 			pauseBtn.x = 340;
 			pauseBtn.y = 30;
-			add(pauseBtn);
+			uiLayer.add(pauseBtn);
 			pauseBtn.eventClick.add(onClickPause);
 			
 			AntStatistic.eventAwardEarned.add(onAwardEarned);
@@ -172,7 +177,7 @@ package states
 		private function onAwardEarned(award:AntAwardData):void 
 		{
 			var g:AwardNotice = new AwardNotice(award);
-			add(g);
+			uiLayer.add(g);
 		}
 		
 		private function onClickPause(btn:AntButton):void 
@@ -182,7 +187,7 @@ package states
 			var p:PauseWindow = new PauseWindow();
 			p.x = stage.width / 2 - p.width / 2;
 			p.y = -100;
-			add(p);
+			uiLayer.add(p);
 			
 			var tween:AntTween = new AntTween(p, 2, AntTransition.EASE_OUT_ELASTIC);
 			tween.moveTo(stage.width / 2 - p.width / 2, stage.height / 2 - p.height / 2);

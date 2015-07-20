@@ -12,6 +12,7 @@ package enemies.blockposts
 	import ru.antkarlov.anthill.AntEntity;
 	import ru.antkarlov.anthill.AntMath;
 	import ru.antkarlov.anthill.AntState;
+	import states.GameState;
 	/**
 	 * Хранит данные о противниках на уровне
 	 * Респаунит врагов
@@ -106,7 +107,7 @@ package enemies.blockposts
 		 * @param	canvas карта
 		 * @return возвращает расстояние до следующего блокпоста
 		 */
-		public static function respawn(canvas:AntState):int {
+		public static function respawn(canvas:GameState):int {
 			
 			var rand:Number = AntMath.randomRangeInt(0, levels[UserData.level].length - 1);
 			
@@ -125,6 +126,8 @@ package enemies.blockposts
 					actor.x = block.posX;
 					actor.y = block.posY;
 				}
+				
+				canvas.mainLayer.add(actor);
 			}
 			
 			return levels[UserData.level][rand].length;
