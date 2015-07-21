@@ -4,6 +4,7 @@ package powerups.actors
 	import powerups.behaviors.ReactionBehavior;
 	import ru.antkarlov.anthill.AntActor;
 	import states.GameState;
+	import user.UserData;
 	
 	/**
 	 * ...
@@ -23,7 +24,7 @@ package powerups.actors
 		override protected function collide():void 
 		{
 			super.collide();
-			var r:PowerBehaviorBase = new ReactionBehavior(UserData.getTimePowerUp("powerReactionLevel"));
+			var r:PowerBehaviorBase = new ReactionBehavior(UserData.powers["powerReaction"].time[UserData.powers["powerReaction"].level]);
 			r.init();
 		}
 		

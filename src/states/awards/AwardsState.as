@@ -7,6 +7,7 @@ package states.awards
 	import ru.antkarlov.anthill.extensions.stats.AntAwardData;
 	import ru.antkarlov.anthill.extensions.stats.AntStatistic;
 	import states.MenuState;
+	import user.StatAward;
 	
 	/**
 	 * ...
@@ -25,8 +26,8 @@ package states.awards
 		{
 			super.create();
 			
-			for (var i:int = 0; i < StatAward.awards.length; i++) {
-				var aw:AntAwardData = AntStatistic.getAward(StatAward.awards[i]);
+			for (var i:int = 0; i < user.StatAward.awards.length; i++) {
+				var aw:AntAwardData = AntStatistic.getAward(user.StatAward.awards[i]);
 				var img:String = "award_block";
 				if (aw.isEarned) {
 					img = aw.userData.img;
@@ -45,7 +46,7 @@ package states.awards
 		
 		private function onClickBack(btn:AntButton):void 
 		{
-			AntG.switchState(new MenuState);
+			Main.stManager.switchWindow(MenuState);
 		}
 		
 	}

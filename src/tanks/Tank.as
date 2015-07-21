@@ -10,6 +10,7 @@ package tanks
 	import ru.antkarlov.anthill.plugins.AntTween;
 	import states.GameState;
 	import tanks.TankControl;
+	import user.UserData;
 	
 	/**
 	 * ...
@@ -82,14 +83,14 @@ package tanks
 		 * @param	money
 		 */
 		public function increaceMoney(money:int):void {
-			UserData.money += (money * moneyPercent);
+			UserData.money.incMoney(money * moneyPercent);
 		}
 		
 		
 		private function fire():void {
-			if (UserData.bullets > 0) {
+			if (user.UserData.bullets > 0) {
 				world.fire();
-				UserData.bullets--;
+				user.UserData.bullets--;
 				//trace("bullets: " + UserData.bullets);
 			}
 		}

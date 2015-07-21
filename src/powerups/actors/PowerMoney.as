@@ -1,6 +1,7 @@
 package powerups.actors 
 {
 	import powerups.behaviors.PowerBehaviorBase;
+	import user.UserData;
 	/**
 	 * ...
 	 * @author Vladimir Saykovsky
@@ -19,7 +20,7 @@ package powerups.actors
 		{
 			super.collide();
 			
-			var r:PowerBehaviorBase = new MoneyBehavior(UserData.getTimePowerUp("powerMoneyLevel");
+			var r:PowerBehaviorBase = new MoneyBehavior(user.UserData.getTimePowerUp("powerMoney");
 			r.init();
 		}
 		

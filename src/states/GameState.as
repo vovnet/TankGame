@@ -27,6 +27,8 @@ package states
 	import tanks.Tank;
 	import ui.AmmoView;
 	import ui.MoneyView;
+	import user.StatAward;
+	import user.UserData;
 	
 	/**
 	 * ...
@@ -108,7 +110,7 @@ package states
 				distance += (world.velocity.y / 20) * AntG.elapsed;
 				distanceLabel.text = distance.toFixed() + " m";
 				respawnEnemies();
-				AntStatistic.track(StatAward.DRIVER, int(distance));
+				AntStatistic.track(user.StatAward.DRIVER, int(distance));
 			}
 		}
 		
@@ -190,7 +192,7 @@ package states
 			uiLayer.add(p);
 			
 			var tween:AntTween = new AntTween(p, 2, AntTransition.EASE_OUT_ELASTIC);
-			tween.moveTo(stage.width / 2 - p.width / 2, stage.height / 2 - p.height / 2);
+			tween.moveTo(stage.width / 2 - p.width / 2, 200);
 			tween.start();	
 			
 		}
@@ -198,8 +200,8 @@ package states
 		public function endGame():void {
 			world.velocity.y = 0;
 			speed = 0;
-			UserData.save();
-			AntG.switchState(new MenuState);
+			user.UserData.save();
+			Main.stManager.switchWindow(GameState);
 		}
 		
 		

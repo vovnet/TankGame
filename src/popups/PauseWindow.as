@@ -6,6 +6,7 @@ package popups
 	import ru.antkarlov.anthill.AntLabel;
 	import states.GameState;
 	import states.MenuState;
+	import user.UserData;
 	
 	/**
 	 * ...
@@ -42,12 +43,12 @@ package popups
 			add(menuBtn);
 			menuBtn.eventClick.add(onClickMenu);
 			
-			UserData.save();
+			user.UserData.save();
 		}
 		
 		private function onClickMenu(btn:AntButton):void 
 		{
-			AntG.switchState(new MenuState);
+			Main.stManager.switchWindow(MenuState);
 		}
 		
 		private function onClickResume(btn:AntButton):void 

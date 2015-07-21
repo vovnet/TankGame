@@ -1,5 +1,6 @@
 package bonus 
 {
+	import user.UserData;
 	/**
 	 * ...
 	 * @author Vladimir Saykovsky
@@ -18,7 +19,7 @@ package bonus
 		{
 			super.behavior();
 			
-			UserData.bullets += 2;
+			user.UserData.bullets += 2;
 		}
 		
 	}

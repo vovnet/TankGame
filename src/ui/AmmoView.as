@@ -2,6 +2,7 @@ package ui
 {
 	import ru.antkarlov.anthill.AntActor;
 	import ru.antkarlov.anthill.AntLabel;
+	import user.UserData;
 	
 	/**
 	 * ...
@@ -18,7 +19,7 @@ package ui
 			addAnimationFromCache("bullet_ui");
 			
 			label = new AntLabel("system", 12);
-			label.text = UserData.bullets.toString();
+			label.text = user.UserData.bullets.toString();
 			label.x = 24;
 			add(label);
 			
@@ -28,7 +29,7 @@ package ui
 		{
 			super.update();
 			
-			label.text = UserData.bullets.toString();
+			label.text = user.UserData.bullets.toString();
 		}
 		
 	}

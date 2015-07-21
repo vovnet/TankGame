@@ -7,6 +7,8 @@ package states
 	import ru.antkarlov.anthill.AntState;
 	import ru.antkarlov.anthill.extensions.stats.AntStatistic;
 	import states.awards.AwardsState;
+	import states.upgrade.UpgradesState;
+	import user.UserData;
 	
 	/**
 	 * ...
@@ -52,7 +54,7 @@ package states
 		
 		private function onClickUpgrade(btn:AntButton):void 
 		{
-			AntG.switchState(new UpgradesState);
+			Main.stManager.switchWindow(UpgradesState);
 		}
 		
 		private function onClicReset(btn:AntButton):void 
@@ -64,13 +66,13 @@ package states
 		
 		private function onClickAwards(btn:AntButton):void 
 		{
-			AntG.switchState(new AwardsState);
+			Main.stManager.switchWindow(AwardsState);
 			
 		}
 		
 		private function onClickStart(btn:AntButton):void 
 		{
-			AntG.switchState(new GameState);
+			Main.stManager.switchWindow(GameState);
 		}
 		
 		

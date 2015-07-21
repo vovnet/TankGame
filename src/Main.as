@@ -11,7 +11,10 @@ package
 	import states.GameState;
 	import states.MenuState;
 	import states.CreditsState;
-	import states.UpgradesState;
+	import states.StateManager;
+	import states.upgrade.UpgradesState;
+	import user.StatAward;
+	import user.UserData;
 
 	/**
 	 * ...
@@ -20,8 +23,7 @@ package
 	[Frame(factoryClass="Preloader")]
 	public class Main extends Sprite 
 	{
-		private var st:Vector.<Class>;
-		private var index:int = 0;
+		public static var stManager:StateManager;
 
 		public function Main() 
 		{
@@ -36,7 +38,7 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 			
-			StatAward.create();
+			user.StatAward.create();
 			//AntStatistic.debugMode = true;
 			AntStatistic.loadData();
 			//AntStatistic.clearData();
@@ -51,13 +53,8 @@ package
 		
 		private function loadComplete():void 
 		{
-			st = new <Class>[GameState, CreditsState, AwardsState, MenuState, UpgradesState];
-			index = 3;
-			
-			var ant:Anthill = new Anthill(st[index], 100);
-			addChild(ant);
-			
-			AntG.debugMode = true;
+			stManager = new StateManager();
+			addChild(stManager);
 		}
 		
 		
