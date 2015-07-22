@@ -19,6 +19,15 @@ package
 		[Embed(source = "../assets/spritesheets/line.xml", mimeType = "application/octet-stream")]
 		protected static var xmlLines:Class;
 		
+		[Embed(source = "../assets/spritesheets/enemies_sprite.png")]
+		protected static var EnemiesSpriteSheet:Class;
+		
+		[Embed(source = "../assets/spritesheets/enemies.xml", mimeType = "application/octet-stream")]
+		protected static var XmlEnemies:Class;
+		
+		[Embed(source = "../assets/img/background_summer.png")]
+		protected static var BackgroundSummer:Class;
+		
 		
 		
 		// ф-я обратного вызова по завершении загрузки графики
@@ -37,6 +46,7 @@ package
 			// картинки
 			loader.addGraphic(viewBulletUi, "bullet_ui");
 			loader.addGraphic(ammoBonus, "ammo_bonus");
+			loader.addGraphic(BackgroundSummer, "background_summer");
 			loader.addClip(some_btn_mc, "simple_button");
 			
 			// мувиклипы
@@ -48,6 +58,14 @@ package
 			// атласы
 			loader.addAtlasA(lines, xmlLines, "linesAtlas");
 			loader.addGraphicFromAtlas("linesAtlas", "linesUpgrade");
+			loader.addAtlasA(EnemiesSpriteSheet, XmlEnemies, "enemiesAtlas");
+			loader.addGraphicFromAtlas("enemiesAtlas", "x", "X");
+			loader.addGraphicFromAtlas("enemiesAtlas", "rock", "rock");
+			loader.addGraphicFromAtlas("enemiesAtlas", "pit", "pit");
+			loader.addGraphicFromAtlas("enemiesAtlas", "mines", "mines");
+			loader.addGraphicFromAtlas("enemiesAtlas", "money", "money");
+			loader.addGraphicFromAtlas("enemiesAtlas", "iconMoney", "iconMoney");
+			loader.addGraphicFromAtlas("enemiesAtlas", "ammo", "ammo");
 			
 			// loading
 			loader.eventComplete.add(onRasterize);

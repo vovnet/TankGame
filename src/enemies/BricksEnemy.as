@@ -17,7 +17,7 @@ package enemies
 			super();
 			
 			behavior = new SimpleDenstructible(this);
-			addAnimationFromCache("brick_mc");
+			addAnimationFromCache("rock");
 			
 		}
 		

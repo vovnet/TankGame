@@ -24,7 +24,6 @@ package enemies.behaviors
 			
 			if (GameState.t != null) {
 				if (actor.bounds.intersectsRect(GameState.t.bounds)) {
-					GameState.t.kill();
 					actor.kill();
 					GameState.isEnd = true;
 				} else if (GameState.bullet != null && actor.bounds.intersectsRect(GameState.bullet.bounds)) {

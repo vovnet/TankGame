@@ -14,7 +14,9 @@ package bonus
 		{
 			super();
 			
-			addAnimationFromCache("coin_mc");
+			addAnimationFromCache("money");
+			animationSpeed = 0.2;
+			play();
 			
 		}
 		

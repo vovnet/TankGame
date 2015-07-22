@@ -22,10 +22,10 @@ package tanks
 		{
 			this.tank = tank;
 			positions = new Vector.<int>();
-			positions.push(112);
-			positions.push(187);
+			positions.push(90);
+			positions.push(180);
 			positions.push(270);
-			positions.push(340);
+			positions.push(360);
 			
 			tank.x = positions[1];
 			numLine = 1;

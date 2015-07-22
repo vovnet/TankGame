@@ -12,32 +12,15 @@ package
 	 */
 	public class WorldBackground extends AntActor 
 	{
-		private var bg1:AntActor;
-		private var bg2:AntActor;
-		
-		private var isLoad:Boolean = false;
+		private var bg1:AntActor = new AntActor();
+		private var bg2:AntActor = new AntActor();
 		
 		public function WorldBackground() 
 		{
 			super();
 			
-			var loader:AntAssetLoader = new AntAssetLoader();
-			loader.addClip(bg_back_mc);
-			loader.eventComplete.add(onCompleteLoad);
-			loader.start();
-			
-		}
-		
-		private function onCompleteLoad(loader:AntAssetLoader):void 
-		{
-			loader.destroy();
-			
-			bg1 = new AntActor();
-			bg1.addAnimationFromCache("bg_back_mc");
-			
-			bg2 = new AntActor();
-			bg2.addAnimationFromCache("bg_back_mc");
-			
+			bg1.addAnimationFromCache("background_summer");
+			bg2.addAnimationFromCache("background_summer");
 			
 			bg1.y = -bg2.height;
 			bg2.y = 0;
@@ -45,11 +28,10 @@ package
 			add(bg1);
 			add(bg2);
 			
-			isLoad = true;
-			
 			moves = true;
-			velocity.y = 200;
+			velocity.y = GameState.speed;
 		}
+		
 		
 		override public function update():void 
 		{
@@ -59,7 +41,9 @@ package
 			} else {
 				moves = true;
 			}
-			if (!isLoad) return;
+			
+			if (velocity.y != GameState.speed) velocity.y = GameState.speed;
+			
 			if (y >= bg1.height) {
 				y = 0;
 			}

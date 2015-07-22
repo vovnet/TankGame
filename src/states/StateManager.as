@@ -26,6 +26,7 @@ package states
 		private var downFader:Sprite = new Sprite();
 		
 		private var window:Class;
+		private var oldWindow:Class;
 		
 		private var isUpOver:Boolean = false;
 		private var isDownOver:Boolean = false;
@@ -45,11 +46,13 @@ package states
 			
 			addChild(upFader);
 			addChild(downFader);
+			
 		}
 		
 		
 		
 		public function switchWindow(window:Class):void {
+			oldWindow = this.window;
 			this.window = window;
 			
 			var tweenUpFader:AntTween = new AntTween(upFader, 0.3);
@@ -72,7 +75,9 @@ package states
 		
 		private function onCloseFader():void 
 		{
-			AntG.switchState(new window);
+			if (oldWindow != window) {
+				AntG.switchState(new window);
+			}
 			
 			var tweenUpFader:AntTween = new AntTween(upFader, 0.3);
 			tweenUpFader.animate("y", -300);
@@ -90,8 +95,6 @@ package states
 		
 		private function onStartOpen():void 
 		{
-			
-			
 			var al:AntTween = new AntTween(gameLayer, 0.2);
 			al.fadeTo(1);
 			al.start();

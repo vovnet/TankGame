@@ -13,7 +13,7 @@ package enemies
 			super();
 			
 			behavior = new BulletDestructable(this);
-			addAnimationFromCache("anti_tank_mc");
+			addAnimationFromCache("x");
 		}
 		
 	}

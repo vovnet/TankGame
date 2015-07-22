@@ -1,9 +1,13 @@
 package states 
 {
+	import adobe.utils.CustomActions;
+	import bonus.BonusBase;
 	import enemies.blockposts.BlockPost;
 	import enemies.BricksEnemy;
+	import enemies.EnemyBase;
 	import enemies.PitEnemy;
 	import popups.AwardNotice;
+	import popups.EndWindow;
 	import popups.PauseWindow;
 	import powerups.actors.PowerReaction;
 	import powerups.actors.PowerUpBase;
@@ -38,8 +42,14 @@ package states
 	{
 		public static var t:Tank;
 		public static var speed:Number;
-		public static var isEnd:Boolean = false;
+		public static var isEnd:Boolean;
 		public static var bullet:Bullet;
+		
+		// счетчик собранных денег
+		public var countMoney:int = 0;
+		
+		public var mainLayer:AntEntity;
+		public var uiLayer:AntEntity;
 		
 		public static var isPause:Boolean;
 		
@@ -49,42 +59,33 @@ package states
 		private var world:WorldBackground;
 		
 		// счетчик пройденного расстояния
-		private var distance:Number = 1;
+		private var distance:Number = 0;
 		
-		private var countMoney:int = 0;
 		private var moneyPanel:MoneyView;
 		
-		public var mainLayer:AntEntity;
-		public var uiLayer:AntEntity;
-		
 		// расстояние до следующего блокпоста
-		private var nextBlockpostDistance:int = 10;
+		private var nextBlockpostDistance:int = 20;
 		// позиция текущего блокпоста
 		private var currentBlockpostPosition:int = 0;
+		
+		// окно паузы
+		private var winPause:PauseWindow = new PauseWindow();
+		
+		// окно конца игры
+		private var winEnd:EndWindow;
+		private var isShowEndWindow:Boolean = false;
 		
 		public function GameState() 
 		{
 			super();
+			
+			
 		}
 		
 		override public function create():void 
 		{
-			mainLayer = new AntEntity();
-			add(mainLayer);
-			
-			uiLayer = new AntEntity();
-			add(uiLayer);
-			
-			world = new WorldBackground();
-			mainLayer.add(world);
-			
 			init();
-			
 			BlockPost.init();
-			
-			speed = 200;
-			isPause = false;
-			isEnd = false;
 		}
 		
 		override public function update():void 
@@ -104,13 +105,11 @@ package states
 			} else if (AntG.keys.isDown("DOWN")) {
 				speed -= 8;
 			}
-			world.velocity.y = speed;
 			
 			if (distanceLabel != null) {
 				distance += (world.velocity.y / 20) * AntG.elapsed;
 				distanceLabel.text = distance.toFixed() + " m";
 				respawnEnemies();
-				AntStatistic.track(user.StatAward.DRIVER, int(distance));
 			}
 		}
 		
@@ -129,6 +128,7 @@ package states
 			}
 			
 			mainLayer.add(bullet);
+			
 		}
 		
 		private function respawnEnemies():void 
@@ -143,27 +143,40 @@ package states
 		
 		private function init():void 
 		{
-			t = new tanks.Tank(this);
+			speed = 200;
+			isPause = false;
+			isEnd = false;
+			
+			mainLayer = new AntEntity();
+			add(mainLayer);
+			
+			uiLayer = new AntEntity();
+			add(uiLayer);
+			
+			world = new WorldBackground();
+			mainLayer.add(world);
+			
+			winEnd = new EndWindow(this);
+			uiLayer.add(winPause);
+			uiLayer.add(winEnd);
+			
+			t = new Tank(this);
 			t.y = 540;
 			mainLayer.add(t);
 			t.play();
 			
 			moneyPanel = new MoneyView();
-			moneyPanel.reset(140, 30);
+			moneyPanel.reset(5, 20);
 			uiLayer.add(moneyPanel);
 			
 			var ammoPanel:AmmoView = new AmmoView();
-			ammoPanel.x = 20;
-			ammoPanel.y = 550;
+			ammoPanel.reset(5, 550);
 			uiLayer.add(ammoPanel);
 			
 			distanceLabel = new AntLabel("system", 12, 0xffffff);
 			distanceLabel.text = distance.toString();
-			distanceLabel.x = 20;
-			distanceLabel.y = 30;
+			distanceLabel.reset(160, 20);
 			uiLayer.add(distanceLabel);
-			
-			isPause = false;
 			
 			var pauseBtn:AntButton = AntButton.makeButton("simple_button", "Pause", new AntLabel("system", 14, 0x000000));
 			pauseBtn.x = 340;
@@ -184,24 +197,54 @@ package states
 		
 		private function onClickPause(btn:AntButton):void 
 		{
-			isPause = !isPause;
-			
-			var p:PauseWindow = new PauseWindow();
-			p.x = stage.width / 2 - p.width / 2;
-			p.y = -100;
-			uiLayer.add(p);
-			
-			var tween:AntTween = new AntTween(p, 2, AntTransition.EASE_OUT_ELASTIC);
-			tween.moveTo(stage.width / 2 - p.width / 2, 200);
-			tween.start();	
-			
+			if (isPause) return;
+			isPause = true;
+			winPause.show();	
 		}
 		
 		public function endGame():void {
+			// если окно было показано, больше не вызываем его
+			if (isShowEndWindow) {
+				return;
+			}
+			isPause = true;
+			isShowEndWindow = true;
 			world.velocity.y = 0;
 			speed = 0;
-			user.UserData.save();
+			UserData.save();
+			winEnd.show();
+		}
+		
+		public function reset():void {
+			// окно не пересоздается, а просто задвигает шторки
 			Main.stManager.switchWindow(GameState);
+			
+			speed = 200;
+			isPause = false;
+			isEnd = false;
+			isShowEndWindow = false;
+			distance = 0;
+			countMoney = 0;
+			BlockPost.init();
+			currentBlockpostPosition = 0;
+			nextBlockpostDistance = 20;
+			
+			// отключаем паверапы у танка, если имеются
+			if (t.power != null) t.power.kill();
+			
+			// удаляем препятствия, бонусы и т.д.
+			while (mainLayer.getAlive(EnemyBase)){
+				mainLayer.getAlive(EnemyBase).kill();
+			}
+			
+			while (mainLayer.getAlive(BonusBase)){
+				mainLayer.getAlive(BonusBase).kill();
+			}
+			
+			while (mainLayer.getAlive(PowerUpBase)){
+				mainLayer.getAlive(PowerUpBase).kill();
+			}
+			
 		}
 		
 		

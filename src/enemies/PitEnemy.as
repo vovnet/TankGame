@@ -17,7 +17,7 @@ package enemies
 			super();
 			
 			behavior = new Indestructible(this);
-			addAnimationFromCache("pit_mc");
+			addAnimationFromCache("pit");
 		}
 		
 	

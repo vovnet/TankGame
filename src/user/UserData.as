@@ -4,6 +4,7 @@ package user
 	import flash.utils.Dictionary;
 	import powerups.actors.PowerUpBase;
 	import ru.antkarlov.anthill.AntCookie;
+	import ru.antkarlov.anthill.extensions.stats.AntStatistic;
 	import states.upgrade.PowerUpBullets;
 	import states.upgrade.PowerUpMoney;
 	import states.upgrade.PowerUpReaction;
@@ -51,7 +52,7 @@ package user
 			powers["powerBullets"].level = int(cookie.read("powerBulletsLevel"));
 			powers["powerBullets"].isMaxUpgrade = int(cookie.read("powerBulletsIsMax"));
 			
-			
+			AntStatistic.loadData();
 		}
 		
 		public static function save():void {
@@ -73,7 +74,7 @@ package user
 			cookie.write("powerBulletsLevel", powers["powerBullets"].level);
 			cookie.write("powerBulletsIsMax", powers["powerBullets"].isMaxUpgrade);
 			
-			
+			AntStatistic.saveData();
 		}
 		
 		/**
@@ -93,6 +94,8 @@ package user
 			powers["powerReaction"] = new PowerUpReaction();
 			powers["powerMoney"] = new PowerUpMoney();
 			powers["powerBullets"] = new PowerUpBullets();
+			
+			AntStatistic.clearData();
 		}
 		
 		/**

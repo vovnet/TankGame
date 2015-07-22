@@ -29,8 +29,6 @@ package powerups.behaviors
 			GameState.t.angleReaction -= 10;
 			super.kill();
 			
-			
-			
 		}
 		
 	}

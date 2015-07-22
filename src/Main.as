@@ -38,11 +38,7 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 			
-			user.StatAward.create();
-			//AntStatistic.debugMode = true;
-			AntStatistic.loadData();
-			//AntStatistic.clearData();
-			AntStatistic.saveData();
+			StatAward.create();
 			
 			// rasterize graphics
 			var assets:AssetLoader = new AssetLoader();
@@ -55,6 +51,8 @@ package
 		{
 			stManager = new StateManager();
 			addChild(stManager);
+			
+			AntG.debugMode = true;
 		}
 		
 		

@@ -16,11 +16,11 @@ package ui
 		{
 			super();
 			
-			addAnimationFromCache("bullet_ui");
+			addAnimationFromCache("ammo");
 			
-			label = new AntLabel("system", 12);
+			label = new AntLabel("system", 24);
 			label.text = user.UserData.bullets.toString();
-			label.x = 24;
+			label.x = 50;
 			add(label);
 			
 		}

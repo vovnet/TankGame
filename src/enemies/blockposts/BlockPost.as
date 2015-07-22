@@ -35,64 +35,72 @@ package enemies.blockposts
 		 */
 		private static var levels:Vector.<Vector.<BlockPostData>>;
 		
+		private static const LINE_1:int = 45;
+		private static const LINE_2:int = 134;
+		private static const LINE_3:int = 222;
+		private static const LINE_4:int = 310;
+		
 		public static function init():void {
 			lowLevel = new Vector.<BlockPostData>();
 			middleLevel = new Vector.<BlockPostData>();
 			hightLevel = new Vector.<BlockPostData>();
 			hardLevel = new Vector.<BlockPostData>();
 			
+			
 			var data1:BlockPostData = new BlockPostData(30);
-			data1.addBlock(90, -100, BricksEnemy);
-			data1.addBlock(165, -100, BricksEnemy);
-			data1.addBlock(165, -40, PitEnemy);
-			data1.addBlock(240, -40, MoneyBonus);
-			data1.addBlock(315, -100, PowerReaction);
-			data1.addBlock(90, -160, AmmoBonus);
-			data1.addBlock(90, -220, AmmoBonus);
+			data1.addBlock(LINE_1, -100, BricksEnemy);
+			data1.addBlock(LINE_2, -100, BricksEnemy);
+			data1.addBlock(LINE_2, -40, PitEnemy);
+			data1.addBlock(LINE_3, -40, MoneyBonus);
+			data1.addBlock(LINE_4, -100, PowerReaction);
+			data1.addBlock(LINE_1, -160, AmmoBonus);
+			data1.addBlock(LINE_1, -220, AmmoBonus);
 			lowLevel.push(data1);
 			
 			var data2:BlockPostData = new BlockPostData(20);
-			data2.addBlock(90, -100, BricksEnemy);
-			data2.addBlock(165, -100, BricksEnemy);
-			data2.addBlock(240, -100, BricksEnemy);
-			data2.addBlock(315, -100, BricksEnemy);
+			data2.addBlock(LINE_1, -100, BricksEnemy);
+			data2.addBlock(LINE_2, -100, BricksEnemy);
+			data2.addBlock(LINE_3, -100, BricksEnemy);
+			data2.addBlock(LINE_4, -100, BricksEnemy);
 			lowLevel.push(data2);
 			
 			var data3:BlockPostData = new BlockPostData(35);
-			data3.addBlock(90, -400, MoneyBonus);
-			data3.addBlock(90, -280, MoneyBonus);
-			data3.addBlock(90, -160, MoneyBonus);
-			data3.addBlock(90, -40, MoneyBonus);
+			data3.addBlock(LINE_1, -400, MoneyBonus);
+			data3.addBlock(LINE_1, -280, MoneyBonus);
+			data3.addBlock(LINE_1, -160, MoneyBonus);
+			data3.addBlock(LINE_1, -40, MoneyBonus);
 			lowLevel.push(data3);
 			
+			
 			var data4:BlockPostData = new BlockPostData(35);
-			data4.addBlock(90, -100, AntiTank);
-			data4.addBlock(240, -100, AntiTank);
-			data4.addBlock(90, -40, AntiTank);
+			data4.addBlock(LINE_1, -100, AntiTank);
+			data4.addBlock(LINE_3, -100, AntiTank);
+			data4.addBlock(LINE_1, -40, AntiTank);
 			lowLevel.push(data4);
 			
+			
 			var data5:BlockPostData = new BlockPostData(35);
-			data5.addBlock(90, -100, AntiTank);
-			data5.addBlock(240, -100, AntiTank);
-			data5.addBlock(90, -40, AntiTank);
+			data5.addBlock(LINE_1, -100, AntiTank);
+			data5.addBlock(LINE_3, -100, AntiTank);
+			data5.addBlock(LINE_1, -40, AntiTank);
 			lowLevel.push(data5);
 			
 			var data6:BlockPostData = new BlockPostData(40);
-			data6.addBlock(90, -100, AntiTank);
-			data6.addBlock(240, -100, AntiTank);
-			data6.addBlock(90, -40, AntiTank);
-			data6.addBlock(165, -340, AntiTank);
-			data6.addBlock(165, -100, MoneyBonus);
-			data6.addBlock(165, -40, MoneyBonus);
-			data6.addBlock(165, -160, MoneyBonus);
-			data6.addBlock(165, -220, MoneyBonus);
+			data6.addBlock(LINE_1, -100, AntiTank);
+			data6.addBlock(LINE_3, -100, AntiTank);
+			data6.addBlock(LINE_1, -40, AntiTank);
+			data6.addBlock(LINE_2, -340, AntiTank);
+			data6.addBlock(LINE_2, -100, MoneyBonus);
+			data6.addBlock(LINE_2, -40, MoneyBonus);
+			data6.addBlock(LINE_2, -160, MoneyBonus);
+			data6.addBlock(LINE_2, -220, MoneyBonus);
 			lowLevel.push(data6);
 			
 			var data7:BlockPostData = new BlockPostData(30);
-			data7.addBlock(165, -400, MoneyBonus);
-			data7.addBlock(240, -280, MoneyBonus);
-			data7.addBlock(165, -160, MoneyBonus);
-			data7.addBlock(240, -40, MoneyBonus);
+			data7.addBlock(LINE_2, -400, MoneyBonus);
+			data7.addBlock(LINE_3, -280, MoneyBonus);
+			data7.addBlock(LINE_2, -160, MoneyBonus);
+			data7.addBlock(LINE_3, -40, MoneyBonus);
 			lowLevel.push(data7);
 			
 			
