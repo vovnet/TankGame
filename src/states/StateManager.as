@@ -65,6 +65,7 @@ package states
 			tweenDownFader.start();
 			tweenUpFader.start();
 			
+			AntG.sounds.play("shtoreCloseSound", 0.2);
 			var al:AntTween = new AntTween(gameLayer, 0.2);
 			al.fadeTo(0);
 			al.start();
@@ -79,7 +80,7 @@ package states
 				AntG.switchState(new window);
 			}
 			
-			AntG.sounds.play("shtoreCloseSound", 0.2);
+			
 			
 			var tweenUpFader:AntTween = new AntTween(upFader, 0.3);
 			tweenUpFader.animate("y", -300);

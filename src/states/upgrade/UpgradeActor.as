@@ -35,7 +35,9 @@ package states.upgrade
 			add(view);
 			view.gotoAndStop(power.level + 1);
 			
-			upButton = AntButton.makeButton("simple_button", power.priceList[power.level].toString(), new AntLabel("system", 14, 0x000000));
+			var t:String = "";
+			if (power.level < 6) t = power.priceList[power.level].toString();
+			upButton = AntButton.makeButton("simple_button", t, new AntLabel("system", 14, 0x000000));
 			upButton.reset(110, 14);
 			add(upButton);
 			
@@ -58,11 +60,10 @@ package states.upgrade
 		}
 		
 		private function updateButton():void {
-			if (isDes) return;
 			// если проапгрейдили максимально
 			if (power.isMaxUpgrade) {
-				upButton.destroy();
-				view.gotoAndStop(6);
+				if (!isDes) upButton.destroy();
+				view.gotoAndStop(7);
 				isDes = true;
 				return;
 			}

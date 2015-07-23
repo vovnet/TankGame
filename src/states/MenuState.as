@@ -30,28 +30,28 @@ package states
 			var startBtn:AntButton = AntButton.makeButton("simple_button", "Start", new AntLabel("system"));
 			startBtn.reset(AntG.width / 2 - startBtn.width / 2, 200);
 			startBtn.useSystemCursor = false;
-			startBtn.soundClick = "clickSound";
+			startBtn.soundOver = "clickSound";
 			add(startBtn);
 			startBtn.eventClick.add(onClickStart);
 			
 			var awardsBtn:AntButton = AntButton.makeButton("simple_button", "Achivements", new AntLabel("system"));
 			awardsBtn.reset(AntG.width / 2 - awardsBtn.width / 2, 260);
 			awardsBtn.useSystemCursor = false;
-			awardsBtn.soundClick = "clickSound";
+			awardsBtn.soundOver = "clickSound";
 			add(awardsBtn);
 			awardsBtn.eventClick.add(onClickAwards);
 			
 			var clearBtn:AntButton = AntButton.makeButton("simple_button", "Clear", new AntLabel("system"));
 			clearBtn.reset(AntG.width / 2 - clearBtn.width / 2, 420);
 			clearBtn.useSystemCursor = false;
-			clearBtn.soundClick = "clickSound";
+			clearBtn.soundOver = "clickSound";
 			add(clearBtn);
 			clearBtn.eventClick.add(onClicReset);
 			
 			var upgradesBtn:AntButton = AntButton.makeButton("simple_button", "Upgrades", new AntLabel("system"));
 			upgradesBtn.reset(AntG.width / 2 - upgradesBtn.width / 2, 300);
 			upgradesBtn.useSystemCursor = false;
-			upgradesBtn.soundClick = "clickSound";
+			upgradesBtn.soundOver = "clickSound";
 			add(upgradesBtn);
 			upgradesBtn.eventClick.add(onClickUpgrade);
 		}
