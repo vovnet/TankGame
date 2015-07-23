@@ -79,6 +79,8 @@ package states
 				AntG.switchState(new window);
 			}
 			
+			AntG.sounds.play("shtoreCloseSound", 0.2);
+			
 			var tweenUpFader:AntTween = new AntTween(upFader, 0.3);
 			tweenUpFader.animate("y", -300);
 			tweenUpFader.delay = 0.5;

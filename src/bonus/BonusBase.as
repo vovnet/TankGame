@@ -1,6 +1,7 @@
 package bonus 
 {
 	import ru.antkarlov.anthill.AntActor;
+	import ru.antkarlov.anthill.AntG;
 	import states.GameState;
 	
 	/**
@@ -39,6 +40,7 @@ package bonus
 			
 			if (GameState.t != null) {
 				if (bounds.intersectsRect(GameState.t.bounds)) {
+					AntG.sounds.play("addBonus");
 					kill();
 					behavior();
 				}

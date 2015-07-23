@@ -20,6 +20,7 @@ package states
 	import ru.antkarlov.anthill.AntLabel;
 	import ru.antkarlov.anthill.AntMath;
 	import ru.antkarlov.anthill.AntPoint;
+	import ru.antkarlov.anthill.AntRect;
 	import ru.antkarlov.anthill.AntState;
 	import ru.antkarlov.anthill.debug.AntMemory;
 	import ru.antkarlov.anthill.extensions.stats.AntAwardData;
@@ -117,6 +118,7 @@ package states
 		{
 			if (bullet != null) return;
 			
+			AntG.sounds.play("shootSound");
 			bullet = defGroup.recycle(Bullet) as Bullet;
 			
 			if (bullet.alive == false)

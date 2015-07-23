@@ -6,6 +6,7 @@ package
 	import ru.antkarlov.anthill.AntCamera;
 	import ru.antkarlov.anthill.AntG;
 	import ru.antkarlov.anthill.Anthill;
+	import ru.antkarlov.anthill.AntSound;
 	import ru.antkarlov.anthill.extensions.stats.AntStatistic;
 	import states.awards.AwardsState;
 	import states.GameState;
@@ -23,6 +24,7 @@ package
 	[Frame(factoryClass="Preloader")]
 	public class Main extends Sprite 
 	{
+		
 		public static var stManager:StateManager;
 
 		public function Main() 
@@ -51,6 +53,9 @@ package
 		{
 			stManager = new StateManager();
 			addChild(stManager);
+			
+			// подгружаем звуки
+			SoundLoader.load();
 			
 			AntG.debugMode = true;
 		}

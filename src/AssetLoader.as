@@ -1,6 +1,8 @@
 package 
 {
 	import ru.antkarlov.anthill.AntAssetLoader;
+	import ru.antkarlov.anthill.AntG;
+	import ru.antkarlov.anthill.AntSoundManager;
 	/**
 	 * ...
 	 * @author Vladimir Saykovsky
@@ -27,7 +29,6 @@ package
 		
 		[Embed(source = "../assets/img/background_summer.png")]
 		protected static var BackgroundSummer:Class;
-		
 		
 		
 		// ф-я обратного вызова по завершении загрузки графики
@@ -66,6 +67,7 @@ package
 			loader.addGraphicFromAtlas("enemiesAtlas", "money", "money");
 			loader.addGraphicFromAtlas("enemiesAtlas", "iconMoney", "iconMoney");
 			loader.addGraphicFromAtlas("enemiesAtlas", "ammo", "ammo");
+			
 			
 			// loading
 			loader.eventComplete.add(onRasterize);

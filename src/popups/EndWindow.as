@@ -33,6 +33,12 @@ package popups
 			menuBtn.y = this.height - menuBtn.height - 40;
 			menuBtn.eventClick.add(onClickMenu);
 			add(menuBtn);
+			
+			var resetBtn:AntButton = AntButton.makeButton("simple_button", "Reset", new AntLabel("system"));
+			resetBtn.x = 40;
+			resetBtn.y = this.height - menuBtn.height - 40;
+			resetBtn.eventClick.add(onClickReset);
+			add(resetBtn);
 		}
 		
 		public function show():void {
@@ -43,7 +49,11 @@ package popups
 		
 		private function onClickMenu(btn:AntButton):void 
 		{
-			//Main.stManager.switchWindow(MenuState);
+			Main.stManager.switchWindow(MenuState);
+		}
+		
+		private function onClickReset(btn:AntButton):void 
+		{
 			game.reset();
 			
 			var tween:AntTween = new AntTween(this, 0.2);
