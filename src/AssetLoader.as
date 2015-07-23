@@ -27,8 +27,17 @@ package
 		[Embed(source = "../assets/spritesheets/enemies.xml", mimeType = "application/octet-stream")]
 		protected static var XmlEnemies:Class;
 		
+		[Embed(source="../assets/spritesheets/small_Buttons_Sprite.png")]
+		protected static var SmallButtonsSheet:Class;
+		
+		[Embed(source="../assets/spritesheets/small_buttons.xml", mimeType = "application/octet-stream")]
+		protected static var XmlSmallButtons:Class;
+		
 		[Embed(source = "../assets/img/background_summer.png")]
 		protected static var BackgroundSummer:Class;
+		
+		[Embed(source = "../assets/img/emptySmallButton.png")]
+		protected static var EmptySmallButton:Class;
 		
 		
 		// ф-я обратного вызова по завершении загрузки графики
@@ -48,6 +57,7 @@ package
 			loader.addGraphic(viewBulletUi, "bullet_ui");
 			loader.addGraphic(ammoBonus, "ammo_bonus");
 			loader.addGraphic(BackgroundSummer, "background_summer");
+			loader.addGraphic(EmptySmallButton, "empty_small_button");
 			loader.addClip(some_btn_mc, "simple_button");
 			
 			// мувиклипы
@@ -67,6 +77,9 @@ package
 			loader.addGraphicFromAtlas("enemiesAtlas", "money", "money");
 			loader.addGraphicFromAtlas("enemiesAtlas", "iconMoney", "iconMoney");
 			loader.addGraphicFromAtlas("enemiesAtlas", "ammo", "ammo");
+			
+			loader.addAtlasA(SmallButtonsSheet, XmlSmallButtons, "small_Buttons_Atlas");
+			loader.addGraphicFromAtlas("small_Buttons_Atlas", "small_Button", "numBtn");
 			
 			
 			// loading
