@@ -1,8 +1,5 @@
-package states 
-{
+package states {
 	import flash.display.Sprite;
-	import flash.events.Event;
-	import ru.antkarlov.anthill.AntActor;
 	import ru.antkarlov.anthill.AntG;
 	import ru.antkarlov.anthill.Anthill;
 	import ru.antkarlov.anthill.plugins.AntTween;
@@ -11,19 +8,18 @@ package states
 	 * ...
 	 * @author Vladimir Saykovsky
 	 */
-	public class StateManager extends Sprite 
-	{
-		[Embed(source="../../assets/img/up_shtora.png")]
+	public class StateManager extends Sprite {
+		[Embed(source = "../../assets/img/up_shtora_1.png")]
 		protected static var upShtora:Class;
 		
-		[Embed(source="../../assets/img/down_shtora.png")]
+		[Embed(source = "../../assets/img/down_shtora_1.png")]
 		protected static var downShtora:Class;
 		
 		// слой со всей игрой
 		private var gameLayer:Sprite = new Sprite();
 		
-		private var upFader:Sprite = new Sprite();
 		private var downFader:Sprite = new Sprite();
+		private var upFader:Sprite = new Sprite();
 		
 		private var window:Class;
 		private var oldWindow:Class;
@@ -31,25 +27,20 @@ package states
 		private var isUpOver:Boolean = false;
 		private var isDownOver:Boolean = false;
 		
-		public function StateManager():void 
-		{
+		public function StateManager():void {
 			addChild(gameLayer);
-			var ant:Anthill = new Anthill(MenuState, 100);
+			var ant:Anthill = new Anthill(MenuState, 60);
 			gameLayer.addChild(ant);
 			
-			
-			upFader.addChild(new upShtora);
 			downFader.addChild(new downShtora);
+			upFader.addChild(new upShtora);
 			
-			upFader.y = -300;
+			upFader.y = -400;
 			downFader.y = 600;
 			
-			addChild(upFader);
 			addChild(downFader);
-			
+			addChild(upFader);
 		}
-		
-		
 		
 		public function switchWindow(window:Class):void {
 			oldWindow = this.window;
@@ -57,7 +48,6 @@ package states
 			
 			var tweenUpFader:AntTween = new AntTween(upFader, 0.3);
 			tweenUpFader.animate("y", 0);
-			
 			
 			var tweenDownFader:AntTween = new AntTween(downFader, 0.3);
 			tweenDownFader.animate("y", 300);
@@ -71,19 +61,15 @@ package states
 			al.start();
 			
 			tweenDownFader.eventComplete.add(onCloseFader);
-			
 		}
 		
-		private function onCloseFader():void 
-		{
+		private function onCloseFader():void {
 			if (oldWindow != window) {
 				AntG.switchState(new window);
 			}
 			
-			
-			
 			var tweenUpFader:AntTween = new AntTween(upFader, 0.3);
-			tweenUpFader.animate("y", -300);
+			tweenUpFader.animate("y", -400);
 			tweenUpFader.delay = 0.5;
 			
 			var tweenDownFader:AntTween = new AntTween(downFader, 0.3);
@@ -96,13 +82,18 @@ package states
 			tweenUpFader.eventStart.add(onStartOpen);
 		}
 		
-		private function onStartOpen():void 
-		{
+		private function onStartOpen():void {
 			var al:AntTween = new AntTween(gameLayer, 0.2);
 			al.fadeTo(1);
 			al.start();
+			//al.eventComplete.add(onHideFader);
 		}
 		
+		private function onHideFader():void {
+			upFader.visible = false;
+			downFader.visible = false;
+		}
+	
 	}
 
 }

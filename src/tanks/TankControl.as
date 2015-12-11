@@ -24,8 +24,8 @@ package tanks
 			positions = new Vector.<int>();
 			positions.push(90);
 			positions.push(180);
-			positions.push(270);
-			positions.push(360);
+			positions.push(274);
+			positions.push(366);
 			
 			tank.x = positions[1];
 			numLine = 1;
@@ -33,11 +33,11 @@ package tanks
 		
 		public function update():void {
 			if (!isTurning) {
-				if (AntG.keys.isPressed("LEFT") && numLine > 0) {
+				if ( (AntG.keys.isPressed("LEFT") || AntG.keys.isPressed("A")) && numLine > 0) {
 					isTurning = true;
 					isTurningLeft = true;
 					
-				} else if (AntG.keys.isPressed("RIGHT") && numLine < 3) {
+				} else if ( (AntG.keys.isPressed("RIGHT") || AntG.keys.isPressed("D") ) && numLine < 3) {
 					isTurning = true;
 					isTurningRight = true;
 				}

@@ -19,6 +19,7 @@ package states.upgrade
 		private var power:PowerUpDataBase;
 		private var isDes:Boolean = false;
 		
+		
 		public function UpgradeActor(upName:String, power:PowerUpDataBase) 
 		{
 			super();
@@ -30,20 +31,23 @@ package states.upgrade
 			add(title);
 			
 			view = new AntActor();
-			view.addAnimationFromCache("linesUpgrade");
-			view.y = 26;
+			view.addAnimationFromCache(AssetLoader.UPDATE_LINES);
+			view.reset(0, 20);
 			add(view);
 			view.gotoAndStop(power.level + 1);
 			
 			var t:String = "";
 			if (power.level < 6) t = power.priceList[power.level].toString();
-			upButton = AntButton.makeButton("simple_button", t, new AntLabel("system", 14, 0x000000));
-			upButton.reset(110, 14);
+			upButton = AntButton.makeButton(AssetLoader.EMPTY_BUTTON, t, new AntLabel("system", 14, 0x880000));
+			upButton.reset(140, 16);
 			add(upButton);
 			
 			upButton.eventClick.add(onClickUpgrade);
 			//UserData.money.addEventListener(Money.CHANGE_BALANCE, onChangeBalance);
 			updateButton();
+			
+			
+			
 		}
 		
 		private function onChangeBalance(e:Event = null):void 
@@ -68,7 +72,8 @@ package states.upgrade
 				return;
 			}
 			if (UserData.money.money < power.priceList[power.level]) {
-				upButton.text = ":(";
+				//upButton.text = ":(";
+				upButton.text = power.priceList[power.level].toString();
 			} else {
 				upButton.text = power.priceList[power.level].toString();
 			}

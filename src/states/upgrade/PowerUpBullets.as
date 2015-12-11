@@ -10,18 +10,18 @@ package states.upgrade
 		public function PowerUpBullets() 
 		{
 			priceList.push(0);
-			priceList.push(50);
-			priceList.push(60);
-			priceList.push(105);
-			priceList.push(180);
-			priceList.push(300);
+			priceList.push(100);
+			priceList.push(350);
+			priceList.push(900);
+			priceList.push(1800);
+			priceList.push(3000);
 			
 			time.push(8);
-			time.push(16);
-			time.push(20);
-			time.push(37);
-			time.push(45);
-			time.push(55);
+			time.push(15);
+			time.push(19);
+			time.push(25);
+			time.push(31);
+			time.push(39);
 		}
 		
 	}

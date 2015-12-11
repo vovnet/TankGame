@@ -2,6 +2,7 @@ package ui
 {
 	import ru.antkarlov.anthill.AntActor;
 	import ru.antkarlov.anthill.AntLabel;
+	import states.GameState;
 	import user.UserData;
 	
 	/**
@@ -16,7 +17,10 @@ package ui
 		{
 			super();
 			
-			addAnimationFromCache("ammo");
+			var actor:AntActor = new AntActor();
+			actor.addAnimationFromCache(AssetLoader.ICON_AMMO);
+			actor.reset(30, -15, 45);
+			add(actor);
 			
 			label = new AntLabel("system", 24);
 			label.text = user.UserData.bullets.toString();

@@ -17,10 +17,9 @@ package enemies
 			super();
 			
 			behavior = new Indestructible(this);
-			addAnimationFromCache("pit");
+			addAnimationFromCache(AssetLoader.ENEMY_HATCH);
 		}
 		
-	
 		
 	}
 

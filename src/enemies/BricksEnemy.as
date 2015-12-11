@@ -17,8 +17,11 @@ package enemies
 			super();
 			
 			behavior = new SimpleDenstructible(this);
-			addAnimationFromCache("rock");
+			addAnimationFromCache(AssetLoader.ENEMY_CAR);
 			
+			// выбираем рандомную машинку
+			playRandomFrame();
+			stop();
 		}
 		
 		

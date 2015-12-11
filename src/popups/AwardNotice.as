@@ -20,7 +20,7 @@ package popups
 			addAnimationFromCache("award_notice_mc");
 			
 			var title:AntLabel = new AntLabel("system", 12, 0x991111);
-			title.text = "Получено достижение!";
+			title.text = "New achievement!";
 			title.wordWrap = true;
 			title.setStroke(0xffffff);
 			title.setSize(250, 20);
@@ -38,8 +38,8 @@ package popups
 			
 			var img:AntActor = new AntActor();
 			img.addAnimationFromCache(award.userData.img);
-			img.x = 12;
-			img.y = 25;
+			img.x = -40;
+			img.y = -5;
 			add(img);
 			
 			this.alpha = 0.7;

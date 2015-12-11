@@ -13,22 +13,22 @@ package powerups.behaviors
 		{
 			super(time);
 			
+			id = 2;
 		}
 		
 		override public function init():void 
 		{
 			super.init();
 			
-			GameState.t.reaction += 6;
+			GameState.t.reaction += 2.5;
 			GameState.t.angleReaction += 10;
 		}
 		
 		override public function kill():void 
 		{
-			GameState.t.reaction -= 6;
+			GameState.t.reaction -= 2.5;
 			GameState.t.angleReaction -= 10;
 			super.kill();
-			
 		}
 		
 	}

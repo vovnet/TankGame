@@ -1,10 +1,9 @@
 package states.awards 
 {
-	import adobe.utils.CustomActions;
+	import ru.antkarlov.anthill.AntActor;
 	import ru.antkarlov.anthill.AntButton;
 	import ru.antkarlov.anthill.AntEntity;
 	import ru.antkarlov.anthill.AntG;
-	import ru.antkarlov.anthill.AntLabel;
 	import ru.antkarlov.anthill.AntState;
 	import ru.antkarlov.anthill.extensions.stats.AntAwardData;
 	import ru.antkarlov.anthill.extensions.stats.AntStatistic;
@@ -16,28 +15,27 @@ package states.awards
 	 * ...
 	 * @author Vladimir Saykovsky
 	 */
-	public class AwardsState extends AntState 
-	{
+	public class AwardsState extends AntState {
 		
-		public function AwardsState() 
-		{
-			super();
-			
-		}
-		
-		override public function create():void 
-		{
+		override public function create():void {
 			super.create();
 			
-			var a:PageList = new PageList();
-			add(a);
+			var back:AntActor = new AntActor();
+			back.addAnimationFromCache(AssetLoader.BACK_UPGRADE_ACHIV);
+			add(back);
 			
-			var actorsPerPage:int = 3;
+			// контейнер для страничек
+			var listOfPages:PageList = new PageList();
+			
+			var actorsPerPage:int = 5;
 			var numPages:int = Math.ceil( StatAward.awards.length / actorsPerPage);
 			var count:int = 0;
 			
+			var page:AntEntity;
+			var img:String;
+			var view:AwardView;
 			for (var i:int = 0; i < numPages; i++) {
-				var page:AntEntity = new AntEntity();
+				page = new AntEntity();
 				
 				for (var j:int = 0; j < actorsPerPage; j++) {
 					// если перебрали все награды, заканчиваем цикл
@@ -46,32 +44,31 @@ package states.awards
 					}
 					
 					var aw:AntAwardData = AntStatistic.getAward(user.StatAward.awards[count]);
-					var img:String = "award_block";
+					img = AssetLoader.AWARD_LOCK;
 					if (aw.isEarned) {
 						img = aw.userData.img;
 					}
-					var view:AwardView = new AwardView(aw.userData.title, aw.userData.desc, img);
+					view = new AwardView(aw.userData.title, aw.userData.desc, img, aw);
+					view.reset(30, j * (view.height + 10) + 10);
 					page.add(view);
-					view.reset(30, j * (view.height + 20) + 10);
 					
 					count++;
 				}
-				a.push(page);
+				listOfPages.push(page);
 			}
+			add(listOfPages);
 			
 			// показываем отображалку
-			a.show();
+			listOfPages.show();
 			
-			var backBtn:AntButton = AntButton.makeButton("simple_button", "Back", new AntLabel("system"));
-			backBtn.reset(AntG.width / 2 - backBtn.width / 2, 560);
+			var backBtn:AntButton = AntButton.makeButton(AssetLoader.BACK_BUTTON);
+			backBtn.reset(AntG.width / 2 - backBtn.width / 2, 550);
 			backBtn.useSystemCursor = false;
 			add(backBtn);
 			backBtn.eventClick.add(onClickBack);
-			
 		}
 		
-		private function onClickBack(btn:AntButton):void 
-		{
+		private function onClickBack(btn:AntButton):void {
 			Main.stManager.switchWindow(MenuState);
 		}
 		

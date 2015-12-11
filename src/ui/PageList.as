@@ -13,18 +13,12 @@ package ui
 	 * ...
 	 * @author Vladimir Saykovsky
 	 */
-	public class PageList extends AntEntity 
-	{
+	public class PageList extends AntEntity {
+		
 		private var pages:Vector.<AntEntity> = new Vector.<AntEntity>();
 		private var buttons:Vector.<AntButton> = new Vector.<AntButton>();
 		private var currentIndex:int = 0;
 		private var currentPage:AntEntity;
-		
-		public function PageList() 
-		{
-			super();
-			
-		}
 		
 		/**
 		 * Добавляет новый экран для отображения
@@ -32,17 +26,40 @@ package ui
 		 */
 		public function push(page:AntEntity):void {
 			pages.push(page);
-			
 		}
 		
 		/**
 		 * После добавления экранов необходимо вызвать этот метод для отрисовки
 		 */
 		public function show():void {
-			if (pages.length < 1) return;
+			if (pages.length < 1)
+				return;
+			showCurrentPage();
+			showNavigateButtons();
+		}
+		
+		private function onClick(btn:AntButton):void {
+			currentIndex = int(btn.text) - 1;
+			btn.kill();
+			for (var i:int = 0; i < buttons.length; i++) {
+				if (buttons[i] == btn) continue;
+				buttons[i].revive();
+			}
 			
 			showCurrentPage();
-			
+		}
+		
+		private function showCurrentPage():void {
+			if (currentPage != null) {
+				remove(currentPage);
+			}
+			currentPage = pages[currentIndex];
+			currentPage.reset(50, 60);
+			currentPage.update();
+			add(currentPage);
+		}
+		
+		private function showNavigateButtons():void {
 			for (var i:int = 0; i < pages.length; i++) {
 				var empty:AntActor = new AntActor();
 				empty.addAnimationFromCache("empty_small_button");
@@ -62,31 +79,8 @@ package ui
 				buttons.push(btn);
 				btn.eventClick.add(onClick);
 				
-				
 				if (i == 0) btn.kill();
 			}
-		}
-		
-		private function onClick(btn:AntButton):void 
-		{
-			currentIndex = int(btn.text) - 1;
-			btn.kill();
-			for (var i:int = 0; i < buttons.length; i++) {
-				if (buttons[i] == btn) continue;
-				buttons[i].revive();
-			}
-			
-			showCurrentPage();
-		}
-		
-		private function showCurrentPage():void {
-			if (currentPage != null) {
-				remove(currentPage);
-			}
-			currentPage = pages[currentIndex];
-			add(currentPage);
-			currentPage.reset(50, 60);
-			
 		}
 		
 	}

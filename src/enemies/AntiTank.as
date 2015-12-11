@@ -13,7 +13,7 @@ package enemies
 			super();
 			
 			behavior = new BulletDestructable(this);
-			addAnimationFromCache("x");
+			addAnimationFromCache(AssetLoader.ENEMY_ANTI);
 		}
 		
 	}

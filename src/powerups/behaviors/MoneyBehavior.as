@@ -13,6 +13,7 @@ package powerups.behaviors
 		{
 			super(time);
 			
+			id = 1;
 		}
 		
 		override public function init():void 

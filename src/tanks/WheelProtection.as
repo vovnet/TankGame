@@ -1,6 +1,7 @@
-package powerups.actors 
+package tanks 
 {
 	import ru.antkarlov.anthill.AntActor;
+	import ru.antkarlov.anthill.AntEntity;
 	import ru.antkarlov.anthill.AntG;
 	import states.GameState;
 	
@@ -8,17 +9,20 @@ package powerups.actors
 	 * ...
 	 * @author Vladimir Saykovsky
 	 */
-	public class PowerUpBase extends AntActor 
+	public class WheelProtection extends AntActor
 	{
 		
-		public function PowerUpBase() 
+		
+		public function WheelProtection() 
 		{
 			super();
 			
+			addAnimationFromCache("wheel_sled");
 			moves = true;
-			velocity.y = GameState.speed;
-			y = -100;
+			velocity.y = 200;
 		}
+		
+		
 		
 		override public function update():void 
 		{
@@ -34,27 +38,9 @@ package powerups.actors
 			velocity.y = GameState.speed;
 			
 			if (y > 680) {
-				
 				kill();
-				return;
 			}
-			
-			if (GameState.t != null) {
-				if (bounds.intersectsRect(GameState.t.bounds)) {
-					collide();
-					AntG.sounds.play("bonus");
-					// убиваем актера
-					kill();
-				}
-			}
-			
 		}
-		
-		protected function collide():void {
-			
-		}
-		
-		
 		
 	}
 

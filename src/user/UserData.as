@@ -19,9 +19,15 @@ package user
 		public static var level:int = 0;
 		public static var tankId:int = 1;
 		
+		public static var isBuyTank1:Boolean = true;
+		public static var isBuyTank2:Boolean = false;
+		public static var isBuyTank3:Boolean = false;
+		public static var isBuyTank4:Boolean = false;
+		public static var isBuyTank5:Boolean = false;
+		
 		public static var powers:Object = new Object();
 		
-		private static var saveName:String = "game002";
+		private static var saveName:String = "RushOfTanks";
 		private static var isExistSave:Boolean = true;
 		
 		public static function load():void {
@@ -52,6 +58,11 @@ package user
 			powers["powerBullets"].level = int(cookie.read("powerBulletsLevel"));
 			powers["powerBullets"].isMaxUpgrade = int(cookie.read("powerBulletsIsMax"));
 			
+			isBuyTank2 = Boolean(cookie.read("isBuyTank2"));
+			isBuyTank3 = Boolean(cookie.read("isBuyTank3"));
+			isBuyTank4 = Boolean(cookie.read("isBuyTank4"));
+			isBuyTank5 = Boolean(cookie.read("isBuyTank5"));
+			
 			AntStatistic.loadData();
 		}
 		
@@ -74,6 +85,11 @@ package user
 			cookie.write("powerBulletsLevel", powers["powerBullets"].level);
 			cookie.write("powerBulletsIsMax", powers["powerBullets"].isMaxUpgrade);
 			
+			cookie.write("isBuyTank2", isBuyTank2);
+			cookie.write("isBuyTank3", isBuyTank3);
+			cookie.write("isBuyTank4", isBuyTank4);
+			cookie.write("isBuyTank5", isBuyTank5);
+			
 			AntStatistic.saveData();
 		}
 		
@@ -91,12 +107,19 @@ package user
 			bullets = 50;
 			tankId = 1;
 			
+			isBuyTank2 = false;
+			isBuyTank3 = false;
+			isBuyTank4 = false;
+			isBuyTank5 = false;
+			
 			powers["powerReaction"] = new PowerUpReaction();
 			powers["powerMoney"] = new PowerUpMoney();
 			powers["powerBullets"] = new PowerUpBullets();
 			
 			AntStatistic.clearData();
 		}
+		
+		
 		
 		/**
 		 * Возвращает время действия паверапа

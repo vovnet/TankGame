@@ -17,8 +17,9 @@ package powerups.actors
 		{
 			super();
 			
-			addAnimationFromCache("power_reaction_mc");
-			
+			addAnimationFromCache(AssetLoader.REACTION_POWERUP);
+			animationSpeed = 0.4;
+			play();
 		}
 		
 		override protected function collide():void 

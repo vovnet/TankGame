@@ -13,10 +13,13 @@ package powerups.behaviors
 	public class PowerBehaviorBase 
 	{
 		// время действия паверапа
-		protected var timeUp:Number = 10;
+		public var timeUp:Number = 10;
 		
 		// счетчик времени работы паверапа
-		protected var countTime:Number = 0;
+		public var countTime:Number = 0;
+		
+		// id паверапа
+		public var id:int = 0;
 		
 		/**
 		 * Constructor

@@ -22,7 +22,7 @@ package
 			bg1.addAnimationFromCache("background_summer");
 			bg2.addAnimationFromCache("background_summer");
 			
-			bg1.y = -bg2.height;
+			bg1.y = -600;
 			bg2.y = 0;
 			
 			add(bg1);
@@ -42,10 +42,12 @@ package
 				moves = true;
 			}
 			
-			if (velocity.y != GameState.speed) velocity.y = GameState.speed;
+			if (velocity.y != GameState.speed) {
+				velocity.y = GameState.speed;
+			}
 			
-			if (y >= bg1.height) {
-				y = 0;
+			if (y > 600) {
+				y -= 600;
 			}
 		}
 		

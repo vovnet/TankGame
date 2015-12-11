@@ -19,12 +19,28 @@ package
 		[Embed(source = "../assets/sounds/shoot.mp3")]
 		private static var ShootSoundEmbed:Class;
 		
+		[Embed(source = "../assets/sounds/melody.mp3")]
+		private static var Melody:Class;
+		
+		[Embed(source = "../assets/sounds/reload.mp3")]
+		private static var ReloadSoundEmbed:Class;
+		
+		[Embed(source = "../assets/sounds/exp.mp3")]
+		private static var ExplotionSoundEmbed:Class;
+		
+		[Embed(source = "../assets/sounds/bonus.mp3")]
+		private static var BonusSoundEmbed:Class;
+		
 		public static function load():void
 		{
 			AntG.sounds.addEmbedded(ClickSoundEmbed, "clickSound");
 			AntG.sounds.addEmbedded(ShtoreCloseSoundEmbed, "shtoreCloseSound");
 			AntG.sounds.addEmbedded(AddBonusEmbed, "addBonus");
 			AntG.sounds.addEmbedded(ShootSoundEmbed, "shootSound");
+			AntG.sounds.addEmbedded(Melody, "melody");
+			AntG.sounds.addEmbedded(ReloadSoundEmbed, "reload");
+			AntG.sounds.addEmbedded(ExplotionSoundEmbed, "explotion");
+			AntG.sounds.addEmbedded(BonusSoundEmbed, "bonus");
 		}
 		
 	}

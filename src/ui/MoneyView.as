@@ -15,11 +15,11 @@ package ui
 		{
 			label = new AntLabel("system", 20);
 			label.text = user.UserData.money.toString();
-			label.reset(50, 10);
+			label.reset(50, 0);
 			add(label);
 			
 			var img:AntActor = new AntActor();
-			img.addAnimationFromCache("iconMoney");
+			img.addAnimationFromCache(AssetLoader.ICON_MONEY);
 			add(img);
 		}
 		

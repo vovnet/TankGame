@@ -1,7 +1,9 @@
 package bonus 
 {
 	import ru.antkarlov.anthill.AntActor;
+	import ru.antkarlov.anthill.extensions.stats.AntStatistic;
 	import states.GameState;
+	import user.StatAward;
 	
 	/**
 	 * ...
@@ -13,11 +15,23 @@ package bonus
 		public function MoneyBonus() 
 		{
 			super();
-			
-			addAnimationFromCache("money");
-			animationSpeed = 0.2;
+			addAnimationFromCache(AssetLoader.MONEY_BONUS);
+			animationSpeed = 0.3;
+			playRandomFrame();
 			play();
 			
+			sound = "addBonus";
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+			if (GameState.isPause)
+			{
+				stop();
+				return;
+			}
+			play();
 		}
 		
 		override public function behavior():void 

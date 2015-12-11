@@ -10,6 +10,7 @@ package bonus
 	 */
 	public class BonusBase extends AntActor 
 	{
+		protected var sound:String = "addBonus";
 		
 		public function BonusBase() 
 		{
@@ -40,7 +41,7 @@ package bonus
 			
 			if (GameState.t != null) {
 				if (bounds.intersectsRect(GameState.t.bounds)) {
-					AntG.sounds.play("addBonus");
+					AntG.sounds.play(sound);
 					kill();
 					behavior();
 				}

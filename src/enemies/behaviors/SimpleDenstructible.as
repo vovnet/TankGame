@@ -5,6 +5,7 @@ package enemies.behaviors
 	import ru.antkarlov.anthill.AntRect;
 	import ru.antkarlov.anthill.extensions.stats.AntStatistic;
 	import states.GameState;
+	import user.StatAward;
 	/**
 	 * Поведение, при котором объект разрушается при столкновении с танком
 	 * ...
@@ -27,11 +28,15 @@ package enemies.behaviors
 			
 			if (GameState.t != null) {
 				if (actor.bounds.intersectsRect(GameState.t.bounds)) {
-					AntStatistic.track("kills", 1);
+					AntStatistic.track(StatAward.KILLS, 1);
 					actor.kill();
+					GameState.instance.explotion(actor.x, actor.y);
+					GameState.speed += 16;
+					GameState.instance.showSpeedUp();
 				} else if (GameState.bullet != null && actor.bounds.intersectsRect(GameState.bullet.bounds)) {
 					actor.kill();
 					GameState.bullet.kill();
+					GameState.instance.explotion(actor.x, actor.y);
 				}
 			}
 		}

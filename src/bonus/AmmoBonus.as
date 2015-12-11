@@ -1,5 +1,6 @@
 package bonus 
 {
+	import states.GameState;
 	import user.UserData;
 	/**
 	 * ...
@@ -12,14 +13,30 @@ package bonus
 		{
 			super();
 			
-			addAnimationFromCache("ammo_bonus");
+			addAnimationFromCache(AssetLoader.AMMO_BONUS);
+			animationSpeed = 0.5;
+			playRandomFrame();
+			play();
+			
+			sound = "reload";
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+			if (GameState.isPause) 
+			{
+				stop();
+				return;
+			}
+			play();
 		}
 		
 		override public function behavior():void 
 		{
 			super.behavior();
 			
-			user.UserData.bullets += 2;
+			user.UserData.bullets += 1;
 		}
 		
 	}

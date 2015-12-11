@@ -8,11 +8,12 @@ package states.upgrade
 	import ru.antkarlov.anthill.AntLabel;
 	import ru.antkarlov.anthill.AntState;
 	import states.MenuState;
+	import ui.PageList;
 	import user.Money;
 	import user.UserData;
 	
 	/**
-	 * Окно с апгрейдами
+	 * Upgrades window
 	 * ...
 	 * @author Vladimir Saykovsky
 	 */
@@ -27,47 +28,36 @@ package states.upgrade
 		public function UpgradesState() 
 		{
 			super();
+			var back:AntActor = new AntActor();
+			back.addAnimationFromCache(AssetLoader.BACK_UPGRADE_ACHIV);
+			add(back);
 			
-			reactionUp = new UpgradeActor("Reaction Up", UserData.powers["powerReaction"]);
-			reactionUp.reset(140, 40);
-			add(reactionUp);
+			var pages:PageList = new PageList();
 			
-			moneyUp = new UpgradeActor("Money Up", UserData.powers["powerMoney"]);
-			moneyUp.reset(140, 120);
-			add(moneyUp);
+			pages.push(new UpgradePage());
 			
-			bulletsUp = new UpgradeActor("Bullets Up", UserData.powers["powerBullets"]);
-			bulletsUp.reset(140, 200);
-			add(bulletsUp);
+			pages.push(new SkinPage(1, 0));
+			pages.push(new SkinPage(2, 10000));
+			pages.push(new SkinPage(3, 25000));
+			pages.push(new SkinPage(4, 50000));
+			pages.push(new SkinPage(5, 100000));
 			
-			moneyLabel = new AntLabel("system", 10, 0xffffff);
-			moneyLabel.text = UserData.money.money.toString();
-			add(moneyLabel);
 			
-			UserData.money.addEventListener(Money.CHANGE_BALANCE, onChangeBalance);
+			add(pages);
+			pages.show();
 			
-			var upgradesBtn:AntButton = AntButton.makeButton("simple_button", "Back", new AntLabel("system"));
-			upgradesBtn.reset(AntG.width / 2 - upgradesBtn.width / 2, 450);
+			var upgradesBtn:AntButton = AntButton.makeButton(AssetLoader.BACK_BUTTON);
+			upgradesBtn.reset(AntG.width / 2 - upgradesBtn.width / 2, 550);
 			upgradesBtn.useSystemCursor = false;
 			add(upgradesBtn);
 			upgradesBtn.eventClick.add(onClickBack);
+			
 		}
+		
 		
 		private function onClickBack(btn:AntButton):void 
 		{
 			Main.stManager.switchWindow(MenuState);
-		}
-		
-		override public function update():void 
-		{
-			super.update();
-			moneyLabel.text = UserData.money.money.toString();
-		}
-		
-		private function onChangeBalance(e:Event):void 
-		{
-			
-			
 		}
 		
 	}
